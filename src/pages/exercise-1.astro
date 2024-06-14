@@ -1,0 +1,69 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Intro from '@/components/Intro.astro'
+import Controls from '@/components/Controls.astro'
+---
+
+<Layout title="GSAP Training">
+  <main class="wrapper my-20 flex flex-col gap-20">
+    <Intro title="General Tweening" eyebrow="Exercise - 1">
+      <p>
+        In this exercise we're going to work with setting up a <a
+          class="link"
+          href="https://gsap.com/docs/v3/GSAP/Tween">basic tween</a
+        >.
+      </p>
+      <p>
+        <strong>General Steps:</strong>
+      </p>
+      <ul class="list-outside list-decimal space-y-4 pl-10">
+        <li>
+          Animate the box from <strong>left</strong> to <strong>right</strong>.
+          Consider playing with some additional properties such as <code
+            >rotation</code
+          > and <code>ease</code>.
+        </li>
+        <li>
+          Change the tween from a <code>.to()</code> to a <code>.from()</code> and
+          observe how the animation changes.
+        </li>
+      </ul>
+      <p></p>
+    </Intro>
+    <div class="rounded border-2 border-dashed border-white/50 p-8">
+      <div id="canvas" class="relative flex flex-col gap-10">
+        <div class="animation-row">
+          <div class="start-node"></div>
+          <div class="animation-node"></div>
+          <div class="end-node"></div>
+        </div>
+      </div>
+    </div>
+    <Controls />
+  </main>
+
+  <script>
+    import gsap from 'gsap'
+
+    const canvas = document.getElementById('canvas')
+
+    const tween = gsap.to('.animation-node', {
+      x: () => canvas?.offsetWidth, // span the full width of the controls element
+      xPercent: -100, // offset the element by 100% of its width (same as calculating the value out of the x value)
+      rotate: 360,
+      duration: 2,
+      paused: true,
+    })
+
+    // DO NOT EDIT BELOW -- Tween controls
+    const playBtn = document.getElementById('play')
+    const pauseBtn = document.getElementById('pause')
+    const reverseBtn = document.getElementById('reverse')
+    const restartBtn = document.getElementById('restart')
+
+    playBtn?.addEventListener('click', () => tween.play())
+    pauseBtn?.addEventListener('click', () => tween.pause())
+    reverseBtn?.addEventListener('click', () => tween.reverse())
+    restartBtn?.addEventListener('click', () => tween.restart())
+  </script>
+</Layout>

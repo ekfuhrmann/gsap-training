@@ -20,11 +20,23 @@
     );
     background-repeat: no-repeat;
   }
+
+  code {
+    @apply bg-red/50 border-red mx-1 rounded-lg border py-1 px-2 font-mono text-sm text-white;
+  }
 }
 
 @layer components {
   .wrapper {
     @apply mx-auto max-w-7xl px-8 sm:px-5;
+  }
+
+  .link {
+    @apply text-blue decoration-wavy hover:underline;
+  }
+
+  .animation-row {
+    @apply relative flex;
   }
 
   .animation-node {
@@ -34,20 +46,33 @@
       inset -2px -7px 8px color-mix(in srgb, var(--color), black 20%),
       inset 2px 7px 8px color-mix(in srgb, var(--color), white 10%);
 
-    &:nth-of-type(1) {
+    .animation-row:nth-child(4n + 1) & {
       --color: var(--color-yellow);
     }
 
-    &:nth-of-type(2) {
+    .animation-row:nth-child(4n + 2) & {
       --color: var(--color-red);
     }
 
-    &:nth-of-type(3) {
+    .animation-row:nth-child(4n + 3) & {
       --color: var(--color-blue);
     }
 
-    &:nth-of-type(4) {
+    .animation-row:nth-child(4n + 4) & {
       --color: var(--color-violet);
     }
+  }
+
+  .start-node,
+  .end-node {
+    @apply absolute -z-10 flex size-20 items-center justify-center rounded bg-white/20 text-center opacity-20 ring ring-inset;
+  }
+
+  .start-node {
+    @apply after:content-['Start'];
+  }
+
+  .end-node {
+    @apply top-0 right-0 after:content-['End'];
   }
 }
