@@ -1,0 +1,53 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-*: initial; /* resets default colors */
+
+  --color-white: #fff;
+  --color-black: #000;
+  --color-yellow: #fed600;
+  --color-red: #ff0954;
+  --color-blue: #00e9ff;
+  --color-violet: #e300ff;
+}
+
+@layer utilities {
+  .bg-primary {
+    background: linear-gradient(
+      to bottom right,
+      hsl(243, 45%, 18%),
+      hsl(243, 45%, 10%)
+    );
+    background-repeat: no-repeat;
+  }
+}
+
+@layer components {
+  .wrapper {
+    @apply mx-auto max-w-7xl px-8 sm:px-5;
+  }
+
+  .animation-node {
+    @apply size-20 rounded;
+    background-color: var(--color);
+    box-shadow:
+      inset -2px -7px 8px color-mix(in srgb, var(--color), black 20%),
+      inset 2px 7px 8px color-mix(in srgb, var(--color), white 10%);
+
+    &:nth-of-type(1) {
+      --color: var(--color-yellow);
+    }
+
+    &:nth-of-type(2) {
+      --color: var(--color-red);
+    }
+
+    &:nth-of-type(3) {
+      --color: var(--color-blue);
+    }
+
+    &:nth-of-type(4) {
+      --color: var(--color-violet);
+    }
+  }
+}
