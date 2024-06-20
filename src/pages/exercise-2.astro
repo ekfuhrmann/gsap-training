@@ -1,0 +1,90 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Intro from '@/components/Intro.astro'
+import Controls from '@/components/Controls.astro'
+---
+
+<Layout title="GSAP Training">
+  <main class="wrapper flex flex-col gap-20 py-20">
+    <Intro title="Timeline" eyebrow="Exercise - 2">
+      <p>
+        In this exercise we're going to get acclimated to the <a
+          class="link"
+          href="https://gsap.com/docs/v3/GSAP/Timeline">timeline</a
+        > which allows us to create sequences between our tweens. Think of it like
+        css <code>keyframes</code>, only rather than working with <code
+          >percantages</code
+        > for handling the animation, you have significantly more control and fine-tuning
+        capabilities.
+      </p>
+      <p>
+        <strong>General Steps:</strong>
+      </p>
+      <ul class="list-outside list-decimal space-y-4 pl-10">
+        <li>
+          Animate each box from <strong>left</strong> to <strong>right</strong>,
+          starting each box after the subsequent box has finished animating.
+        </li>
+      </ul>
+      <p></p>
+    </Intro>
+    <div class="rounded border-2 border-dashed border-white/50 p-8">
+      <div id="canvas" class="relative flex flex-col gap-10">
+        <div class="animation-row">
+          <div class="start-node"></div>
+          <div class="animation-node yellow"></div>
+          <div class="end-node"></div>
+        </div>
+        <div class="animation-row">
+          <div class="start-node"></div>
+          <div class="animation-node red"></div>
+          <div class="end-node"></div>
+        </div>
+        <div class="animation-row">
+          <div class="start-node"></div>
+          <div class="animation-node blue"></div>
+          <div class="end-node"></div>
+        </div>
+      </div>
+    </div>
+    <Controls />
+  </main>
+
+  <script>
+    import gsap from 'gsap'
+
+    const canvas = document.getElementById('canvas')
+
+    const timeline = gsap
+      .timeline({ paused: true })
+      .to('.animation-node.yellow', {
+        x: () => canvas?.offsetWidth, // span the full width of the controls element
+        xPercent: -100, // offset the element by 100% of its width (same as calculating the value out of the x value)
+        rotate: 360,
+        duration: 2,
+      })
+      .to('.animation-node.red', {
+        x: () => canvas?.offsetWidth,
+        xPercent: -100,
+        rotate: 360,
+        duration: 2,
+      })
+      .to('.animation-node.blue', {
+        x: () => canvas?.offsetWidth,
+        xPercent: -100,
+        rotate: 360,
+        duration: 2,
+      })
+
+    // DO NOT EDIT BELOW -- Timeline controls
+    const playBtn = document.getElementById('play')
+    const pauseBtn = document.getElementById('pause')
+    const reverseBtn = document.getElementById('reverse')
+    const restartBtn = document.getElementById('restart')
+
+    playBtn?.addEventListener('click', () => timeline.play())
+    pauseBtn?.addEventListener('click', () => timeline.pause())
+    reverseBtn?.addEventListener('click', () => timeline.reverse())
+    restartBtn?.addEventListener('click', () => timeline.restart())
+  </script>
+</Layout>
